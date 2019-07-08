@@ -29,7 +29,7 @@ RUN apt install -y vim
 #
 
 # dependency
-RUN apt-get install -y autoconf automake build-essential pkgconf libtool libzip-dev libjpeg-dev git libavformat-dev libavcodec-dev libavutil-dev libswscale-dev libavdevice-dev
+RUN apt-get install -y autoconf automake build-essential pkgconf libtool libzip-dev libjpeg-dev git libavformat-dev libavcodec-dev libavutil-dev libswscale-dev libavdevice-dev libmicrohttpd-dev
 
 # build & install
 RUN bash -c " \
