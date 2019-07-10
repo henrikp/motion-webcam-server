@@ -39,7 +39,7 @@ RUN apt-get install -y autoconf automake build-essential pkgconf libtool libzip-
 # build & install the latest stable release
 RUN bash -c " \
 cd ~ && \
-git clone https://github.com/Motion-Project/motion/tree/release-4.2.2 && \
+git clone --branch "4.2" https://github.com/Motion-Project/motion.git && \
 cd motion && \
 autoreconf -fiv && \
 ./configure && \
