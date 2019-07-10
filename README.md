@@ -1,49 +1,19 @@
-# motion-webcam-server
+# motion-webcam-server (armv7l/amd64)
 
-use motion as a webcam server in docker
+use the latest version of motion as a webcam server in a docker container
 
 [motion's offical github](https://github.com/Motion-Project/motion)
 
 ## Usage
 
-### For Camera0
+Edit parameters in **docker-compose.yml**. The current _image_ (**henrikdocker/motion-webcam-server**) was built for _armv7l_, _amd64_ support is in **allenyllee/motion-webcam-server**. Support for other platforms could be built (not tried) using **Dockerfile** as the [Ubuntu docker](https://hub.docker.com/_/ubuntu) image supports _amd64_, _arm32v7_, _arm64v8_, _i386_, _ppc64le_ and _s390x_. 
 
-run ``./run.sh motion0 8081 /dev/video0``
-and open [http://localhost:8081](http://localhost:8081)
+### Single camera
+Copy **conf/motion.conf.dist** to **conf/motion.conf**.
 
-### For Camera1
+Edit parameters in **conf/motion.conf** to suit your needs. You can disable the **/tmp/motion** redirection under _volumes_ if you are using live streaming only. 
 
-run ``./run.sh motion1 8082 /dev/video1``
-and open [http://localhost:8082](http://localhost:8082)
+All cameras must be forwarded using the **devices** section, don't remember to mention them in **motion.conf** as well.
 
-## my motion.conf
-
-```text
-# Videodevice to be used for capturing  (default /dev/video0)
-# for FreeBSD default is /dev/bktr0
-videodevice /dev/video1
-
-# Image width (pixels). Valid range: Camera dependent, default: 320
-width 640
-
-# Image height (pixels). Valid range: Camera dependent, default: 240
-height 480
-
-# Maximum number of frames to be captured per second.
-# Valid range: 2-100. Default: 100 (almost no limit).
-framerate 30
-
-# Use ffmpeg to encode videos of motion (default: off)
-ffmpeg_output_movies off
-
-# Target base directory for pictures and films
-# Recommended to use absolute path. (Default: current working directory)
-target_dir /tmp/motion
-
-# Maximum framerate for stream streams (default: 1)
-stream_maxrate 30
-
-# Restrict stream connections to localhost only (default: on)
-stream_localhost off
-
-```
+### Multiple cameras 
+https://motion-project.github.io/motion_config.html#configfiles

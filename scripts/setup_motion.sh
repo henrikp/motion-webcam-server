@@ -9,4 +9,6 @@ SOURCE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # https://github.com/johndevs/docker-webcam-server/blob/master/conf/motion.conf
 # sudo cp motion.conf /etc/motion/motion.conf
 
-cp $SOURCE_DIR/motion.conf /usr/local/etc/motion/
+# cp $SOURCE_DIR/motion.conf /usr/local/etc/motion/
+
+motion

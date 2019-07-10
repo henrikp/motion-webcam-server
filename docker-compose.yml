@@ -1,0 +1,14 @@
+version: '3'
+services:
+  monitor:
+    image: henrikdocker/motion-webcam-server:armv7l
+    environment:
+      - TZ="Europe/Tallinn"
+    volumes:
+      - ../motion-conf/:/usr/local/etc/motion/
+      - ../motion-data:/tmp/motion
+    devices:
+      - "/dev/video0:/dev/video0"
+    ports:
+      - "8080:8080"
+      - "8081:8081" # First camera port

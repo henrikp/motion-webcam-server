@@ -1,19 +1,24 @@
 # dockerfile template
 #
-# VERSION               0.0.1
+# VERSION               0.0.2
 
-FROM      ubuntu:16.04
-LABEL     maintainer="allen7575@gmail.com"
+FROM      ubuntu:18.04
+LABEL     maintainer="ahvenas@gmail.com"
+
+############
+#
+############
+ENV DEBIAN_FRONTEND=noninteractive
 
 ############
 # update package list
 ############
-RUN apt update
+RUN apt-get update
 
 ##########
 # install vim
 ##########
-RUN apt install -y vim
+#RUN apt install -y vim
 
 
 ############
@@ -31,10 +36,10 @@ RUN apt install -y vim
 # dependency
 RUN apt-get install -y autoconf automake build-essential pkgconf libtool libzip-dev libjpeg-dev git libavformat-dev libavcodec-dev libavutil-dev libswscale-dev libavdevice-dev libmicrohttpd-dev
 
-# build & install
+# build & install the latest stable release
 RUN bash -c " \
 cd ~ && \
-git clone https://github.com/Motion-Project/motion.git && \
+git clone https://github.com/Motion-Project/motion/tree/release-4.2.2 && \
 cd motion && \
 autoreconf -fiv && \
 ./configure && \
@@ -60,7 +65,14 @@ cd ~ && rm -rf ./motion"
 ##############
 # upgrade
 ##############
-RUN apt upgrade -y
+RUN apt-get upgrade -y
+
+##############
+# Initial timezone
+##############
+RUN echo "Europe/Tallinn" > /etc/timezone
+RUN apt-get install -y tzdata
+RUN dpkg-reconfigure -f noninteractive tzdata
 
 ##############
 # cleanup
@@ -87,4 +99,4 @@ RUN chmod +x /scripts/*
 
 ENTRYPOINT ["/scripts/init.sh"]
 
-CMD ["bash"]
+# CMD ["bash"]
